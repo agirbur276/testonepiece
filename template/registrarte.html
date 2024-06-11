@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Regístrate</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url(https://www.gratistodo.com/wp-content/uploads/2021/07/One-Piece-Wallpapers-4.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      font-family: 'Arial Narrow', sans-serif; 
+      font-weight: bolder; 
+    }
+
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.1); 
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      color: #fff; 
+      font-family: "Comic Neue", sans-serif;
+      font-weight: bolder; 
+    }
+
+    .controls {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: rgb(184, 0, 0); 
+      color: #fff; 
+      border: none;
+      margin-bottom: 10px; 
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.1); 
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: rgb(189, 161, 22); 
+      color: black; 
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1); 
+    }
+
+    .success-message {
+      background-color: rgba(221, 221, 221, 0.8);
+      color: rgb(0, 98, 23);
+      padding: 5px;
+      border-radius: 5px;
+      font-family: 'Roboto', sans-serif;
+      font-weight: bold;
+      margin-top: 5px;
+      font-size: 12px;
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      text-align: center;
+    }
+
+    .error-message {
+      background-color: rgba(221, 221, 221, 0.8);
+      color: rgb(255, 1, 1);
+      padding: 5px;
+      border-radius: 5px;
+      font-family: 'Roboto', sans-serif;
+      font-weight: bold;
+      margin-top: 5px;
+      font-size: 12px;
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      text-align: center;
+    }
+
+    .warning-message {
+      background-color: rgba(255, 255, 0, 0.8);
+      color: black;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: 'Roboto', sans-serif;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>REGÍSTRATE</h1>
+    {% if request.args.get('message') %}
+      <div class="error-message">{{ request.args.get('message') }}</div>
+    {% endif %}
+    {% if success %}
+      <div class="success-message">Usuario creado exitosamente</div>
+    {% endif %}
+    <form action="/usercrear" method="post">
+      <input class="controls" type="text" name="username" value="" placeholder="Escribe un usuario para loguearte"><br><br>
+      <input class="controls" type="password" name="password" value="" placeholder="Escribe una contraseña"><br><br>
+      <input class="controls" type="email" name="email" value="" placeholder="Escribe el email para registrarte"><br><br>
+      <div class="warning-message">
+        Una vez que te registres, por favor inicia sesión para poder realizar el TEST.
+      </div>
+      <div class="col">
+        <button class="btn btn-primary mb-3" type="submit">Guardar</button>
+      </div>
+    </form>
+    <a href='/login'>
+      <button type="button">Loguearse</button>
+    </a>
+  </div>
+</body>
+</html>

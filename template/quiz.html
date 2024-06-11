@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <style>
+        body {
+            background-image: url(https://otakukart.com/wp-content/uploads/2021/03/one.jpg);
+            background-size: cover;
+            background-position: center;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .quiz-container {
+            max-width: 600px;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #000;
+            background-color: rgba(255, 255, 255, 0.8);
+            overflow-y: auto;
+            max-height: calc(100vh - 100px);
+        }
+        .question-box {
+            border: 2px solid #000;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #e1feff;
+            text-align: left;
+        }
+        .question-box p {
+            margin: 0;
+            font-weight: bold;
+        }
+        .question-text {
+            margin-left: 10px;
+        }
+        .submit-button {
+            background-color: #69d0f2;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #00b7ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <form action="/submit_quiz" method="POST">
+            {% for question in questions %}
+                <div class="question-box">
+                    <p>{{ question[1] }}</p>
+                    <div class="question-text">
+                        <input type="radio" name="{{ question[0] }}" value="a"> {{ question[2] }}<br>
+                        <input type="radio" name="{{ question[0] }}" value="b"> {{ question[3] }}<br>
+                        <input type="radio" name="{{ question[0] }}" value="c"> {{ question[4] }}<br>
+                    </div>
+                </div>
+            {% endfor %}
+            <input type="submit" class="submit-button" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <style>
+        body {
+            background-color: #d0fef0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .result-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        .summary-box {
+            background-color: transparent;
+            color: red;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .summary-box p {
+            margin: 0;
+        }
+        .message-box {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .message-box p {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .message-box .green {
+            color: green;
+        }
+        .message-box .red {
+            color: red;
+        }
+        .question-box {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-box.correct {
+            background-color: #d0fef0;
+            border: 1px solid green;
+        }
+        .question-box.incorrect {
+            background-color: #ffcccc;
+            border: 1px solid red;
+        }
+        .question-box p {
+            margin: 0 0 10px;
+            font-weight: bold;
+        }
+        .question-text span {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .message-img {
+            max-width: 100px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h1>RESULTADO TIPO TEST</h1>
+        
+        <div class="summary-box">
+            {% set total_answers = user_score + incorrect_answers %}
+            {% set score_ratio = (user_score / total_questions) * 10 %}
+            <p>TU NOTA: {{ score_ratio }} SOBRE 10</p>
+        </div>
+        
+        <div class="message-box">
+            {% if user_score >= 8 %}
+                <p class="green">¡Muy bien!</p>
+                <img src="https://img.wattpad.com/cover/244492470-288-k800510.jpg" alt="Imagen de felicitación" class="message-img">
+            {% else %}
+                <p class="red">Parece que no te has visto One Piece...</p>
+                <img src="https://i.pinimg.com/564x/c3/25/ea/c325ea47c8c3291eac309802d99a6de1.jpg" alt="Imagen de decepción" class="message-img">
+            {% endif %}
+        </div>
+        <br>
+        {% for question, user_answer, correct_answer, is_correct in quiz_data %}
+            <div class="question-box {% if is_correct %}correct{% else %}incorrect{% endif %}">
+                <p>{{ question }}</p>
+                <div class="question-text">
+                    {% if is_correct %}
+                        <span style="color: green;">Respuesta correcta: {{ user_answer }}</span>
+                    {% else %}
+                        <span style="color: red;">Respuesta incorrecta: {{ user_answer }}</span>
+                        <span style="color: green;">Respuesta correcta: {{ correct_answer }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
